@@ -14,18 +14,18 @@ app.use(express.static(assetsPath))
 const PORT = 3000;
 
 app.get("/",(req,res)=>{
-    res.render("index")
+    res.render("pages/index")
 })
 
 app.get('/about',(req,res)=>{
-    res.render("about")
+    res.render("pages/about")
 })
 
 app.get("/contact-me",(req,res)=>{
-    res.render("contact-me")
+    res.render("pages/contact-me")
 })
 
 app.get("*",(req,res)=>{
-    res.render("404")
+    res.render("pages/404")
 })
 app.listen(PORT,()=> console.log(`Basic Information Site Running on port ${PORT}`))

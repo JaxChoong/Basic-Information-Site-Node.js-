@@ -1,38 +1,31 @@
 var fs = require('fs');
 var express = require("express");
 var app = express()
+const path = require("node:path")
+
+//set view engine to use ejs
+app.set('views', path.join(__dirname,"views"))
+app.set('view engine', "ejs")
+
+//set assets path
+const assetsPath = path.join(__dirname, "public")
+app.use(express.static(assetsPath))
 
 const PORT = 3000;
 
 app.get("/",(req,res)=>{
-    fs.readFile('index.html',function(err,data){
-        res.writeHead(200,{'Content-Type':'text/html'});
-        res.write(data);
-        return res.end()
-    })
+    res.render("index")
 })
 
 app.get('/about',(req,res)=>{
-    fs.readFile('about.html',function(err,data){
-        res.writeHead(200,{'Content-Type':'text/html'});
-        res.write(data);
-        return res.end()
-    })
+    res.render("about")
 })
 
 app.get("/contact-me",(req,res)=>{
-    fs.readFile('contact-me.html',function(err,data){
-        res.writeHead(200,{'Content-Type':'text/html'});
-        res.write(data);
-        return res.end()
-    })
+    res.render("contact-me")
 })
 
 app.get("*",(req,res)=>{
-    fs.readFile('404.html',function(err,data){
-        res.writeHead(200,{'Content-Type':'text/html'});
-        res.write(data);
-        return res.end()
-    })
+    res.render("404")
 })
 app.listen(PORT,()=> console.log(`Basic Information Site Running on port ${PORT}`))
